@@ -91,9 +91,10 @@ export const askAgent = async (req, res) => {
 
 export const getChatHistory = async (req, res) => {
   const { sessionId } = req.params;
+  const userId = req.user?._id || req.query.userId; // or get from JWT/session
 
   try {
-    const chats = await Chat.find({ sessionId }).sort({ timestamp: 1 });
+    const chats = await Chat.find({ sessionId, userId }).sort({ timestamp: 1 });
     res.json(chats);
   } catch (err) {
     console.error('[Chat History Error]', err);

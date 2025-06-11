@@ -6,15 +6,9 @@ import { protect, adminOnly } from '../middleware/authMiddleware.js';
 const router = express.Router();
 
 // Setup multer for file uploads
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/');
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + '-' + file.originalname);
-  }
-});
-const upload = multer({ storage });
+
+// Configure multer to store files temporarily in 'uploads/' (before uploading to S3)
+const upload = multer({ dest: 'uploads/' });
 
 // POST /api/admin/upload → upload a new file and ingest
 router.post('/upload', protect, adminOnly, upload.single('file'), uploadAndIngest);

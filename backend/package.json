@@ -13,11 +13,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.828.0",
     "@langchain/community": "^0.3.45",
     "@langchain/core": "^0.3.57",
     "@langchain/google-genai": "^0.2.10",
     "@langchain/openai": "^0.5.12",
     "@pinecone-database/pinecone": "^6.0.1",
+    "aws-sdk": "^2.1692.0",
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
@@ -29,7 +31,8 @@
     "mammoth": "^1.9.1",
     "mongoose": "^8.15.0",
     "morgan": "^1.10.0",
-    "multer": "^2.0.0",
+    "multer": "^2.0.1",
+    "multer-s3": "^3.0.1",
     "pdf-parse": "^1.1.1",
     "redis": "^5.5.6"
   },
