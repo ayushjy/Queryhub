@@ -26,7 +26,7 @@ export default function UserDashboard({ user, setUser }) {
     if (!sessionId) return;
 
     try {
-      const res = await fetch(`/api/chat/history/${sessionId}`, {
+      const res = await fetch(`/api/chat/history/${sessionId}?userId=${user._id}`, {
         method: 'GET',
         credentials: 'include',
       });

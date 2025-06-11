@@ -8,8 +8,7 @@ const AdminDashboard = ({ user, setUser }) => {
   const [profileOpen, setProfileOpen] = useState(false);
   const profileRef = useRef(null);
 
-  const backendUrl = 'http://localhost:5000';
-
+  
   // Fetch files on mount
   useEffect(() => {
     fetchFiles();
@@ -46,27 +45,27 @@ const AdminDashboard = ({ user, setUser }) => {
   };
 
   const handleUpload = async () => {
-  if (!selectedFile) return;
-  setUploading(true);
-  const formData = new FormData();
-  formData.append('file', selectedFile);
+    if (!selectedFile) return;
+    setUploading(true);
+    const formData = new FormData();
+    formData.append('file', selectedFile);
 
-  try {
-    const res = await fetch('/api/admin/upload', {
-      method: 'POST',
-      credentials: 'include',
-      body: formData,
-    });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.message || 'Upload failed');
-    setSelectedFile(null);
-    setFiles(data.files || []); // <-- update files state directly
-  } catch (err) {
-    console.error(err);
-  } finally {
-    setUploading(false);
-  }
-};
+    try {
+      const res = await fetch('/api/admin/upload', {
+        method: 'POST',
+        credentials: 'include',
+        body: formData,
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Upload failed');
+      setSelectedFile(null);
+      setFiles(data.files || []); // <-- update files state directly
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setUploading(false);
+    }
+  };
 
   const handleDelete = async (filename) => {
     try {
@@ -138,7 +137,7 @@ const AdminDashboard = ({ user, setUser }) => {
           <div className="flex flex-col sm:flex-row items-center gap-4">
             <input
               type="file"
-              accept=".pdf"
+              accept=".pdf,.docx,.txt"
               onChange={handleFileChange}
               className="bg-gray-700 p-2 rounded w-full sm:w-auto"
             />
