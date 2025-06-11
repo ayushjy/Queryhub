@@ -11,6 +11,7 @@
 - 💬 OpenAI API (LLM + Embeddings)  
 - 🧠 Redis for buffer memory  
 - 🗂 MongoDB for persistent chat storage  
+- ☁️ **AWS S3 for file storage**  
 - ⚛️ React (Frontend) + Express.js (Backend)
 
 ---
@@ -23,6 +24,7 @@
 - 🔄 Multi-turn memory using Redis Buffer Memory  
 - 💾 Persistent chat history stored in MongoDB  
 - 🔍 Agent-based RAG conversational responses  
+- ☁️ **Uploaded files stored securely in AWS S3**    
 - 📑 File support: PDF, DOC/DOCX, TXT
 
 ---
@@ -47,6 +49,12 @@ MONGODB_URI=your_mongodb_uri
 REDIS_URL=redis://localhost:6379  
 JWT_SECRET=your_jwt_secret  
 NODE_ENV=development  
+
+# AWS S3 Configs  
+AWS_ACCESS_KEY_ID=your_access_key  
+AWS_SECRET_ACCESS_KEY=your_secret_key  
+AWS_REGION=your_s3_region  
+S3_BUCKET_NAME=your_bucket_name
 
 3️⃣ Start Redis Server  
 Make sure Redis is installed and running locally.
@@ -85,7 +93,8 @@ Persistence
 - 🔑 [OpenAI API Key](https://platform.openai.com/account/api-keys)
 - 📦 [Pinecone API Key](https://app.pinecone.io/)
 - 🍃 MongoDB URI from [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
-- ⚡ Redis (local installation for development)
+- ⚡ Redis (local installation for development)  
+- ☁️ AWS S3 credentials (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html)
 
 Make sure to create a Pinecone index with:
 - Embedding model: `text-embedding-3-small`
