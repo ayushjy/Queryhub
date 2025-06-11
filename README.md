@@ -29,14 +29,14 @@
 
 ## ⚙️ Local Setup Instructions
 
-### 1️⃣ Clone the Repository
+### 1️⃣ Clone the Repository  
 
-git clone https://github.com/ayushjy/Queryhub.git
+git clone https://github.com/ayushjy/Queryhub.git  
 cd Queryhub
 
-2️⃣ Backend Setup
-cd backend
-npm install
+2️⃣ Backend Setup  
+cd backend  
+npm install  
 
 Create a .env file inside /backend with the following:
 PORT=5000  
@@ -48,10 +48,10 @@ REDIS_URL=redis://localhost:6379
 JWT_SECRET=your_jwt_secret  
 NODE_ENV=development  
 
-3️⃣ Start Redis Server
+3️⃣ Start Redis Server  
 Make sure Redis is installed and running locally.
 
-macOS/Linux:redis-server
+macOS/Linux:redis-server  
 Windows: https://redis.io/docs/latest/operate/oss_and_stack/install/archive/install-redis/install-redis-on-windows/
 
 4️⃣ Frontend Setup
