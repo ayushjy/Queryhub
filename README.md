@@ -59,7 +59,7 @@ cd ../frontend
 npm install  
 npm start  
 
-🧠 How It Works
+🧠 How It Works  
 Admin Uploads File
 → Stored → Parsed → Chunked → Embedded via text-embedding-3-small (OpenAI) → Stored in Pinecone.
 
