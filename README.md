@@ -54,10 +54,10 @@ Make sure Redis is installed and running locally.
 macOS/Linux:redis-server  
 Windows: https://redis.io/docs/latest/operate/oss_and_stack/install/archive/install-redis/install-redis-on-windows/
 
-4️⃣ Frontend Setup
-cd ../frontend
-npm install
-npm start
+4️⃣ Frontend Setup  
+cd ../frontend  
+npm install  
+npm start  
 
 🧠 How It Works
 Admin Uploads File
