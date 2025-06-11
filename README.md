@@ -1,4 +1,4 @@
-# 🚀 QueryHub – AI Agent Chat App with RAG + Buffer Memory
+# 🚀 QueryHub – AI Agent Chat App with RAG + Retriever Tool + Buffer Memory
 
 **QueryHub** is a multi-turn AI conversational web app powered by **Retrieval-Augmented Generation (RAG)**, custom **LangChain agents**, and **vector search**. Admins can upload documents (PDF, DOCX, TXT), and users can query them via a smart AI agent chatbot.
 
