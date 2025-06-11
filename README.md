@@ -91,5 +91,5 @@ Make sure to create a Pinecone index with:
 - Embedding model: `text-embedding-3-small`
 - Dimensions: `1536`
 
-🧑‍💻 Author
+🧑‍💻 Author  
 Made with ❤️ by Ayush Jyoti
