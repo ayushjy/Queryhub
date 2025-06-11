@@ -39,14 +39,14 @@ cd backend
 npm install
 
 Create a .env file inside /backend with the following:
-PORT=5000
-OPENAI_API_KEY=your_openai_api_key
-PINECONE_API_KEY=your_pinecone_api_key
-PINECONE_INDEX_NAME=your_index_name
-MONGODB_URI=your_mongodb_uri
-REDIS_URL=redis://localhost:6379
-JWT_SECRET=your_jwt_secret
-NODE_ENV=development
+PORT=5000  
+OPENAI_API_KEY=your_openai_api_key  
+PINECONE_API_KEY=your_pinecone_api_key  
+PINECONE_INDEX_NAME=your_index_name  
+MONGODB_URI=your_mongodb_uri  
+REDIS_URL=redis://localhost:6379  
+JWT_SECRET=your_jwt_secret  
+NODE_ENV=development  
 
 3️⃣ Start Redis Server
 Make sure Redis is installed and running locally.
