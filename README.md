@@ -27,7 +27,7 @@ Built with:
 ## 🚀 Running Locally
 
 ### 1. Clone the repo
-git clone https://github.com/yourusername/queryhub.git
+git clone https://github.com/ayushjy/Queryhub.git
 cd queryhub
 
 2. Setup Backend
@@ -47,10 +47,11 @@ NODE_ENV=development
 3. Start Redis Server
 Make sure Redis is installed and running locally.
 On macOS/Linux:redis-server
+
 On Windows:
 Install Redis for Windows from: https://redis.io/docs/latest/operate/oss_and_stack/install/archive/install-redis/install-redis-on-windows/
 
-4. Setup Frontend
+5. Setup Frontend
 cd ../frontend
 npm install
 npm start
