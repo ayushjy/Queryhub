@@ -38,7 +38,7 @@ cd Queryhub
 cd backend  
 npm install  
 
-Create a .env file inside /backend with the following:
+Create a .env file inside /backend with the following:  
 PORT=5000  
 OPENAI_API_KEY=your_openai_api_key  
 PINECONE_API_KEY=your_pinecone_api_key  
