@@ -1,0 +1,10 @@
+import { ChatOpenAI } from "@langchain/openai";
+
+const openaiClient = new ChatOpenAI({
+  openAIApiKey: process.env.OPENAI_API_KEY, // Set this in your .env
+  modelName: "gpt-4o", // or "gpt-4-turbo", "gpt-3.5-turbo", etc.
+  temperature: 0.2,
+  maxTokens: 2048,
+});
+
+export default openaiClient;
