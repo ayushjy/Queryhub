@@ -11,7 +11,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: 'https://queryhub-virid.vercel.app/', // frontend URL
+    origin: 'https://queryhub-virid.vercel.app', // frontend URL
     credentials: true,
 }));
 app.use(express.json());
