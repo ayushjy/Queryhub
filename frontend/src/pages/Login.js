@@ -22,7 +22,10 @@ const Login = ({ setUser }) => {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || 'Login failed');
-      const meRes = await fetch('https://queryhub-ccsl.onrender.com/api/auth/me', { credentials: 'include' });
+      const meRes = await fetch('https://queryhub-ccsl.onrender.com/api/auth/me', {
+        method: 'GET',
+        credentials: 'include'
+      });
       const meData = await meRes.json();
       setUser(meData); // <-- Set user state here
 

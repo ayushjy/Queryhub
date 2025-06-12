@@ -16,6 +16,7 @@ function App() {
         const checkAuth = async () => {
             try {
                 const res = await fetch('https://queryhub-ccsl.onrender.com/api/auth/me', {
+                    method: 'GET',
                     credentials: 'include',
                 });
                 if (res.ok) {
