@@ -26,7 +26,7 @@ export default function UserDashboard({ user, setUser }) {
     if (!sessionId) return;
 
     try {
-      const res = await fetch(`/api/chat/history/${sessionId}?userId=${user._id}`, {
+      const res = await fetch(`https://queryhub-ccsl.onrender.com/api/chat/history/${sessionId}?userId=${user._id}`, {
         method: 'GET',
         credentials: 'include',
       });
@@ -45,7 +45,7 @@ export default function UserDashboard({ user, setUser }) {
     setLoading(true);
     setAnswer('');
     try {
-      const res = await fetch('/api/chat/agent', {
+      const res = await fetch('https://queryhub-ccsl.onrender.com/api/chat/agent', {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
@@ -80,7 +80,7 @@ export default function UserDashboard({ user, setUser }) {
 
   // 🔐 Logout handler
   const handleLogout = async () => {
-    await fetch('/api/auth/logout', {
+    await fetch('https://queryhub-ccsl.onrender.com/api/auth/logout', {
       method: 'POST',
       credentials: 'include',
     });

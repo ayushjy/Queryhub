@@ -5,7 +5,6 @@ const Login = ({ setUser }) => {
   const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const backendUrl = 'http://localhost:5000';
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -15,7 +14,7 @@ const Login = ({ setUser }) => {
     e.preventDefault();
     setError('');
     try {
-      const res = await fetch('/api/auth/login', {
+      const res = await fetch('https://queryhub-ccsl.onrender.com/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include', // 🟢 include cookies
@@ -23,7 +22,7 @@ const Login = ({ setUser }) => {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || 'Login failed');
-      const meRes = await fetch('/api/auth/me', { credentials: 'include' });
+      const meRes = await fetch('https://queryhub-ccsl.onrender.com/api/auth/me', { credentials: 'include' });
       const meData = await meRes.json();
       setUser(meData); // <-- Set user state here
 

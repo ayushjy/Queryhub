@@ -5,7 +5,6 @@ const Register = () => {
   const [formData, setFormData] = useState({ username: '', email: '', password: '', role: 'user' });
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const backendUrl = 'http://localhost:5000';
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -14,7 +13,7 @@ const Register = () => {
  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const res = await fetch('/api/auth/register', {
+        const res = await fetch('https://queryhub-ccsl.onrender.com/api/auth/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include', // 🟢 include cookies
