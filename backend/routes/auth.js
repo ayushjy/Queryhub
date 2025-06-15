@@ -10,7 +10,12 @@ router.get('/me', protect, (req, res) => {
     res.json(req.user);
 });
 router.post('/logout', (req, res) => {
-    res.clearCookie('token');
+    res.clearCookie('token', {
+        httpOnly: true,
+        secure: true, // Set to true in production',
+        sameSite: 'none',
+        path: '/', // required to match the default set path
+    });
     res.json({ message: 'Logged out successfully' });
 });
 export default router;

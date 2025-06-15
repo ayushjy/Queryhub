@@ -39,7 +39,7 @@ export const askAgent = async (req, res) => {
     });
 
     // 3. Add Calculator tool (optional)
-    const calculator = new Calculator();
+    // const calculator = new Calculator();
 
     // 4. Setup RedisChatMessageHistory for the session
     const messageHistory = new RedisChatMessageHistory({
@@ -60,7 +60,7 @@ export const askAgent = async (req, res) => {
 
     // 6. Initialize LangChain Agent with tools + memory
     const executor = await initializeAgentExecutorWithOptions(
-      [retrieverTool, calculator],
+      [retrieverTool],
       openaiClient,
       {
         agentType: 'openai-functions',

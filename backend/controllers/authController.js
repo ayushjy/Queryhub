@@ -65,11 +65,11 @@ export const login = async (req, res) => {
     }
 };
 
-export const logout = (req, res) => {
-    res.clearCookie('token', {
-        httpOnly: true,
-        secure: false, // Set to true in production',
-        sameSite: 'lax',
-    });
-    res.json({ message: 'Logged out successfully' });
-};
+// export const logout = (req, res) => {
+//     res.clearCookie('token', {
+//         httpOnly: true,
+//         secure: false, // Set to true in production',
+//         sameSite: 'lax',
+//     });
+//     res.json({ message: 'Logged out successfully' });
+// };
