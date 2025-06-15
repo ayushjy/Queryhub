@@ -15,7 +15,7 @@ function App() {
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                const res = await fetch('https://queryhub-ccsl.onrender.com/api/auth/me', {
+                const res = await fetch('https://queryhub-kij8.onrender.com/api/auth/me', {
                     method: 'GET',
                     credentials: 'include',
                 });

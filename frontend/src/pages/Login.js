@@ -14,7 +14,7 @@ const Login = ({ setUser }) => {
     e.preventDefault();
     setError('');
     try {
-      const res = await fetch('https://queryhub-ccsl.onrender.com/api/auth/login', {
+      const res = await fetch('https://queryhub-kij8.onrender.com/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include', // 🟢 include cookies
@@ -22,7 +22,7 @@ const Login = ({ setUser }) => {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || 'Login failed');
-      const meRes = await fetch('https://queryhub-ccsl.onrender.com/api/auth/me', {
+      const meRes = await fetch('https://queryhub-kij8.onrender.com/api/auth/me', {
         method: 'GET',
         credentials: 'include'
       });

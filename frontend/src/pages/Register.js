@@ -13,7 +13,7 @@ const Register = () => {
  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const res = await fetch('https://queryhub-ccsl.onrender.com/api/auth/register', {
+        const res = await fetch('https://queryhub-kij8.onrender.com/api/auth/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include', // 🟢 include cookies

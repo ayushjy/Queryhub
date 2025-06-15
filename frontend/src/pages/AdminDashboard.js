@@ -30,7 +30,7 @@ const AdminDashboard = ({ user, setUser }) => {
 
   const fetchFiles = async () => {
     try {
-      const res = await fetch('https://queryhub-ccsl.onrender.com/api/admin/files', {
+      const res = await fetch('https://queryhub-kij8.onrender.com/api/admin/files', {
         credentials: 'include',
       });
       const data = await res.json();
@@ -51,7 +51,7 @@ const AdminDashboard = ({ user, setUser }) => {
     formData.append('file', selectedFile);
 
     try {
-      const res = await fetch('https://queryhub-ccsl.onrender.com/api/admin/upload', {
+      const res = await fetch('https://queryhub-kij8.onrender.com/api/admin/upload', {
         method: 'POST',
         credentials: 'include',
         body: formData,
@@ -69,7 +69,7 @@ const AdminDashboard = ({ user, setUser }) => {
 
   const handleDelete = async (filename) => {
     try {
-      const res = await fetch(`https://queryhub-ccsl.onrender.com/api/admin/files/${filename}`, {
+      const res = await fetch(`https://queryhub-kij8.onrender.com/api/admin/files/${filename}`, {
         method: 'DELETE',
         credentials: 'include',
       });
@@ -81,7 +81,7 @@ const AdminDashboard = ({ user, setUser }) => {
   };
 
   const handleLogout = async () => {
-    await fetch('https://queryhub-ccsl.onrender.com/api/auth/logout', { method: 'POST', credentials: 'include' });
+    await fetch('https://queryhub-kij8.onrender.com/api/auth/logout', { method: 'POST', credentials: 'include' });
     setUser(null);
   };
 
