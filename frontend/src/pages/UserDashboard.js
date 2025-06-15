@@ -141,16 +141,35 @@ export default function UserDashboard({ user, setUser }) {
           </button>
         </div>
 
+        {/* Ask input */}
+
+        <textarea
+          rows={4}
+          className="w-full bg-gray-800 border border-gray-600 rounded-lg p-4 text-white focus:ring-2 focus:ring-teal-400 focus:outline-none resize-none"
+          placeholder="Type your question..."
+          value={question}
+          onChange={(e) => setQuestion(e.target.value)}
+        ></textarea>
+        <div className="flex justify-end mt-4">
+          <button
+            onClick={handleAsk}
+            disabled={loading}
+            className="bg-teal-500 hover:bg-teal-400 px-6 py-2 rounded-lg text-white font-semibold transition duration-300 disabled:opacity-50"
+          >
+            {loading ? 'Thinking...' : 'Ask'}
+          </button>
+        </div>
+
         {/* Chat history */}
+        
         <div className="space-y-4 mb-6">
           {chatHistory.map((msg, index) => (
             <div
               key={index}
-              className={`p-4 rounded-lg ${
-                msg.role === 'user'
-                  ? 'bg-gray-800 text-right border border-gray-600'
-                  : 'bg-teal-900 border border-teal-700 text-left'
-              }`}
+              className={`p-4 rounded-lg ${msg.role === 'user'
+                ? 'bg-gray-800 text-right border border-gray-600'
+                : 'bg-teal-900 border border-teal-700 text-left'
+                }`}
             >
               <span className="block text-sm font-bold mb-1">
                 {msg.role === 'user' ? 'You' : 'Agent'}
@@ -161,23 +180,6 @@ export default function UserDashboard({ user, setUser }) {
         </div>
 
         {/* Ask input */}
-        <textarea
-          rows={4}
-          className="w-full bg-gray-800 border border-gray-600 rounded-lg p-4 text-white focus:ring-2 focus:ring-teal-400 focus:outline-none resize-none"
-          placeholder="Type your question..."
-          value={question}
-          onChange={(e) => setQuestion(e.target.value)}
-        ></textarea>
-
-        <div className="flex justify-end mt-4">
-          <button
-            onClick={handleAsk}
-            disabled={loading}
-            className="bg-teal-500 hover:bg-teal-400 px-6 py-2 rounded-lg text-white font-semibold transition duration-300 disabled:opacity-50"
-          >
-            {loading ? 'Thinking...' : 'Ask'}
-          </button>
-        </div>
 
         {/* Latest answer */}
         {/* {answer && (
