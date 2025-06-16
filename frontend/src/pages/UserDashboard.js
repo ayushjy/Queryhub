@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 export default function UserDashboard({ user, setUser }) {
   const [question, setQuestion] = useState('');
@@ -6,6 +6,7 @@ export default function UserDashboard({ user, setUser }) {
   const [loading, setLoading] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [chatHistory, setChatHistory] = useState([]);
+  const chatEndRef = useRef(null);
 
   // 👉 Generate new sessionId (UUID-like using Date and random string)
   const generateSessionId = () => {
@@ -19,6 +20,11 @@ export default function UserDashboard({ user, setUser }) {
     }
     fetchChatHistory();
   }, []);
+
+  // 🔁 Scroll to bottom on new messages
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [chatHistory]);
 
   // 🔁 Fetch chat history from MongoDB using sessionId
   const fetchChatHistory = async () => {
@@ -70,7 +76,16 @@ export default function UserDashboard({ user, setUser }) {
   };
 
   // 🔄 Start a new chat (reset session)
-  const handleNewChat = () => {
+  const handleNewChat = async () => {
+    const oldSessionId = localStorage.getItem('sessionId');
+    if (oldSessionId) {
+      await fetch('https://queryhub-kij8.onrender.com/api/chat/clear-memory', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ sessionId: oldSessionId }),
+      });
+    }
     const newSessionId = generateSessionId();
     localStorage.setItem('sessionId', newSessionId);
     setChatHistory([]);
@@ -142,7 +157,6 @@ export default function UserDashboard({ user, setUser }) {
         </div>
 
         {/* Ask input */}
-
         <textarea
           rows={4}
           className="w-full bg-gray-800 border border-gray-600 rounded-lg p-4 text-white focus:ring-2 focus:ring-teal-400 focus:outline-none resize-none"
@@ -160,34 +174,25 @@ export default function UserDashboard({ user, setUser }) {
           </button>
         </div>
 
-        {/* Chat history */}
-        
-        <div className="space-y-4 mb-6">
+        {/* 💬 Chat Messages */}
+        <div className="space-y-4 mb-6 mt-6">
           {chatHistory.map((msg, index) => (
-            <div
-              key={index}
-              className={`p-4 rounded-lg ${msg.role === 'user'
-                ? 'bg-gray-800 text-right border border-gray-600'
-                : 'bg-teal-900 border border-teal-700 text-left'
-                }`}
-            >
-              <span className="block text-sm font-bold mb-1">
-                {msg.role === 'user' ? 'You' : 'Agent'}
-              </span>
-              <p className="whitespace-pre-line">{msg.content}</p>
+            <div key={index} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+              <div
+                className={`max-w-[70%] px-4 py-3 rounded-2xl shadow-sm text-sm ${msg.role === 'user'
+                  ? 'bg-blue-600 text-white rounded-br-none'
+                  : 'bg-gray-700 text-gray-100 rounded-bl-none'
+                  }`}
+              >
+                <span className="block mb-1 text-xs font-medium opacity-80">
+                  {msg.role === 'user' ? 'You' : 'Agent'}
+                </span>
+                <p className="whitespace-pre-line leading-relaxed">{msg.content}</p>
+              </div>
             </div>
           ))}
+          <div ref={chatEndRef} />
         </div>
-
-        {/* Ask input */}
-
-        {/* Latest answer */}
-        {/* {answer && (
-          <div className="mt-8 bg-gray-800 border border-gray-700 rounded-lg p-6 transition-all duration-300">
-            <h3 className="text-lg font-semibold text-teal-400 mb-2">Agent's Response:</h3>
-            <p className="whitespace-pre-line text-gray-200">{answer}</p>
-          </div>
-        )} */}
       </main>
     </div>
   );

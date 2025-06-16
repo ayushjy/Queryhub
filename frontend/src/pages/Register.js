@@ -10,23 +10,22 @@ const Register = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
- const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const res = await fetch('https://queryhub-kij8.onrender.com/api/auth/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include', // 🟢 include cookies
-            body: JSON.stringify(formData),
-        });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.message || 'Registration failed');
-        navigate('/login');
+      const res = await fetch('https://queryhub-kij8.onrender.com/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Registration failed');
+      navigate('/login');
     } catch (err) {
-        setError(err.message);
+      setError(err.message);
     }
-};
-
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
@@ -34,6 +33,14 @@ const Register = () => {
         onSubmit={handleSubmit}
         className="bg-gray-800 p-8 rounded shadow-md w-full max-w-md space-y-4"
       >
+        {/* Logo */}
+        <div
+          className="text-3xl font-bold mb-6 text-center cursor-pointer hover:text-indigo-400 transition"
+          onClick={() => navigate('/')}
+        >
+          QueryHub
+        </div>
+
         <h2 className="text-2xl font-bold text-center">Register</h2>
 
         {error && <p className="text-red-500">{error}</p>}
@@ -81,6 +88,17 @@ const Register = () => {
         >
           Register
         </button>
+
+        {/* Link to Login */}
+        <p className="text-gray-400 text-sm mt-4 text-center">
+          Already a user?{' '}
+          <span
+            onClick={() => navigate('/login')}
+            className="underline cursor-pointer text-indigo-400 hover:text-indigo-300"
+          >
+            Login
+          </span>
+        </p>
       </form>
     </div>
   );

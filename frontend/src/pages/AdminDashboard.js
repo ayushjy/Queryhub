@@ -8,7 +8,7 @@ const AdminDashboard = ({ user, setUser }) => {
   const [profileOpen, setProfileOpen] = useState(false);
   const profileRef = useRef(null);
 
-  
+
   // Fetch files on mount
   useEffect(() => {
     fetchFiles();
@@ -133,7 +133,9 @@ const AdminDashboard = ({ user, setUser }) => {
       <main className="flex-1 w-full max-w-3xl mx-auto py-8 px-4">
         {/* Upload Section */}
         <section className="mb-10">
-          <h2 className="text-xl font-semibold mb-4">Upload PDF</h2>
+          <h2 className="text-xl font-semibold mb-4">
+            Upload Document (<span className="font-normal text-gray-400">PDF, DOC, DOCX, or TXT</span>)
+          </h2>
           <div className="flex flex-col sm:flex-row items-center gap-4">
             <input
               type="file"
