@@ -35,7 +35,7 @@ const Register = () => {
       >
         {/* Logo */}
         <div
-          className="text-3xl font-bold mb-6 text-center cursor-pointer hover:text-indigo-400 transition"
+          className="text-3xl font-bold mb-6 text-center cursor-pointer text-gray-300 hover:text-indigo-400 transition"
           onClick={() => navigate('/')}
         >
           QueryHub

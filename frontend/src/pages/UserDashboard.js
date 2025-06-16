@@ -8,12 +8,11 @@ export default function UserDashboard({ user, setUser }) {
   const [chatHistory, setChatHistory] = useState([]);
   const chatEndRef = useRef(null);
 
-  // 👉 Generate new sessionId (UUID-like using Date and random string)
+  // Generate a sessionId and store in localStorage
   const generateSessionId = () => {
     return `session-${Date.now()}-${Math.random().toString(36).substring(2, 10)}`;
   };
 
-  // ✅ Ensure sessionId exists in localStorage
   useEffect(() => {
     if (!localStorage.getItem('sessionId')) {
       localStorage.setItem('sessionId', generateSessionId());
@@ -21,12 +20,10 @@ export default function UserDashboard({ user, setUser }) {
     fetchChatHistory();
   }, []);
 
-  // 🔁 Scroll to bottom on new messages
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [chatHistory]);
 
-  // 🔁 Fetch chat history from MongoDB using sessionId
   const fetchChatHistory = async () => {
     const sessionId = localStorage.getItem('sessionId');
     if (!sessionId) return;
@@ -43,13 +40,13 @@ export default function UserDashboard({ user, setUser }) {
     }
   };
 
-  // 🚀 Ask question to the agent
   const handleAsk = async () => {
     if (!question.trim()) return;
 
     const sessionId = localStorage.getItem('sessionId');
     setLoading(true);
     setAnswer('');
+
     try {
       const res = await fetch('https://queryhub-kij8.onrender.com/api/chat/agent', {
         method: 'POST',
@@ -62,7 +59,6 @@ export default function UserDashboard({ user, setUser }) {
       setAnswer(data.answer);
       setQuestion('');
 
-      // 🧠 Update chat history after new message
       setChatHistory((prev) => [
         ...prev,
         { role: 'user', content: question },
@@ -75,7 +71,6 @@ export default function UserDashboard({ user, setUser }) {
     }
   };
 
-  // 🔄 Start a new chat (reset session)
   const handleNewChat = async () => {
     const oldSessionId = localStorage.getItem('sessionId');
     if (oldSessionId) {
@@ -93,7 +88,6 @@ export default function UserDashboard({ user, setUser }) {
     setQuestion('');
   };
 
-  // 🔐 Logout handler
   const handleLogout = async () => {
     await fetch('https://queryhub-kij8.onrender.com/api/auth/logout', {
       method: 'POST',
@@ -104,7 +98,7 @@ export default function UserDashboard({ user, setUser }) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen flex flex-col bg-gray-900 text-white">
       {/* Header */}
       <header className="flex justify-between items-center px-6 py-4 border-b border-gray-700 bg-gray-800">
         <h1 className="text-2xl font-bold tracking-wide hover:text-teal-400 cursor-pointer transition duration-300">
@@ -125,7 +119,6 @@ export default function UserDashboard({ user, setUser }) {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
             </svg>
           </button>
-
           {profileOpen && (
             <div className="absolute right-0 mt-2 w-64 bg-gray-800 border border-gray-600 rounded-lg shadow-lg p-4 z-10">
               <p className="text-sm text-gray-300 mb-3">
@@ -142,11 +135,12 @@ export default function UserDashboard({ user, setUser }) {
         </div>
       </header>
 
-      {/* Main */}
-      <main className="max-w-4xl mx-auto p-6">
+      {/* Main chat section */}
+      <main className="flex-grow flex flex-col max-w-4xl mx-auto w-full p-4 pb-32">
+        {/* New Chat button */}
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold hover:text-teal-300 transition duration-300">
-            Ask the Agent
+            Chat with Agent
           </h2>
           <button
             onClick={handleNewChat}
@@ -156,33 +150,16 @@ export default function UserDashboard({ user, setUser }) {
           </button>
         </div>
 
-        {/* Ask input */}
-        <textarea
-          rows={4}
-          className="w-full bg-gray-800 border border-gray-600 rounded-lg p-4 text-white focus:ring-2 focus:ring-teal-400 focus:outline-none resize-none"
-          placeholder="Type your question..."
-          value={question}
-          onChange={(e) => setQuestion(e.target.value)}
-        ></textarea>
-        <div className="flex justify-end mt-4">
-          <button
-            onClick={handleAsk}
-            disabled={loading}
-            className="bg-teal-500 hover:bg-teal-400 px-6 py-2 rounded-lg text-white font-semibold transition duration-300 disabled:opacity-50"
-          >
-            {loading ? 'Thinking...' : 'Ask'}
-          </button>
-        </div>
-
-        {/* 💬 Chat Messages */}
-        <div className="space-y-4 mb-6 mt-6">
+        {/* Chat Messages */}
+        <div className="flex flex-col gap-4 overflow-y-auto">
           {chatHistory.map((msg, index) => (
             <div key={index} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
               <div
-                className={`max-w-[70%] px-4 py-3 rounded-2xl shadow-sm text-sm ${msg.role === 'user'
-                  ? 'bg-blue-600 text-white rounded-br-none'
-                  : 'bg-gray-700 text-gray-100 rounded-bl-none'
-                  }`}
+                className={`max-w-[75%] px-4 py-3 rounded-2xl shadow text-sm ${
+                  msg.role === 'user'
+                    ? 'bg-blue-600 text-white rounded-br-none'
+                    : 'bg-gray-700 text-gray-100 rounded-bl-none'
+                }`}
               >
                 <span className="block mb-1 text-xs font-medium opacity-80">
                   {msg.role === 'user' ? 'You' : 'Agent'}
@@ -194,6 +171,28 @@ export default function UserDashboard({ user, setUser }) {
           <div ref={chatEndRef} />
         </div>
       </main>
+
+      {/* Sticky Input */}
+      <div className="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-700 p-4 z-20">
+        <div className="max-w-4xl mx-auto">
+          <textarea
+            rows={2}
+            className="w-full bg-gray-800 border border-gray-600 rounded-lg p-3 text-white focus:ring-2 focus:ring-teal-400 focus:outline-none resize-none"
+            placeholder="Type your question..."
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+          ></textarea>
+          <div className="flex justify-end mt-2">
+            <button
+              onClick={handleAsk}
+              disabled={loading}
+              className="bg-teal-500 hover:bg-teal-400 px-6 py-2 rounded-lg text-white font-semibold transition duration-300 disabled:opacity-50"
+            >
+              {loading ? 'Thinking...' : 'Ask'}
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

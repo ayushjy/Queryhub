@@ -38,7 +38,7 @@ const Login = ({ setUser }) => {
       <form className="bg-gray-800 p-8 rounded-lg shadow-md w-full max-w-md" onSubmit={handleSubmit}>
         {/* Logo */}
         <div
-          className="text-3xl font-bold mb-6 text-center cursor-pointer hover:text-indigo-400 transition"
+          className="text-3xl font-bold mb-6 text-center cursor-pointer text-gray-300 hover:text-indigo-400 transition"
           onClick={() => navigate('/')}
         >
           QueryHub
