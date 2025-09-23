@@ -13,7 +13,7 @@ const Home = () => {
 
       {/* Subtext */}
       <p className="text-lg md:text-2xl mb-8 text-gray-400 text-center max-w-xl">
-        Your smart assistant for document search, powered by Langchain and advanced vector search.
+        Your smart tech assistant for document search, powered by Langchain and advanced vector search.
       </p>
 
       {/* Buttons */}
